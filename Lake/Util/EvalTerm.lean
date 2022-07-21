@@ -24,7 +24,7 @@ def addAndCompileTerm (declName : Name) (value : Expr) : TermElabM Unit := do
     safety      := DefinitionSafety.unsafe
   }
   Term.ensureNoUnassignedMVars decl
-  addAndCompile decl
+  addAndCompile (← Core.getMaxHeartbeats) decl
 
 unsafe def unsafeEvalTerm (α) [ToExpr α] (term : Syntax) : TermElabM α := do
   let declName := `_eval
